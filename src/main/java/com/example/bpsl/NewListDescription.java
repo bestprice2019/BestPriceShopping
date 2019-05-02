@@ -71,6 +71,7 @@ public class NewListDescription extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String AMPM = "AM";
                         int realHour = 0;
+                        String realMin = "";
                         if(hourOfDay > 11){
                             AMPM = "PM";
                         }
@@ -83,7 +84,13 @@ public class NewListDescription extends AppCompatActivity {
                         else {
                             realHour = hourOfDay;
                         }
-                        timeTV.setText(realHour+":"+minute+" "+AMPM);
+                        if(minute < 10){
+                            realMin = "0"+minute;
+                        }
+                        else {
+                            realMin = minute+"";
+                        }
+                        timeTV.setText(realHour+":"+realMin+" "+AMPM);
                     }
                 },hour,minute,false);
                 tpd.show();
