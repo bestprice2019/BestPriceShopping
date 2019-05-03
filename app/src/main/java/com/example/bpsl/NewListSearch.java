@@ -1,5 +1,6 @@
 package com.example.bpsl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,8 @@ public class NewListSearch extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.newlistoption);
+                Intent intent = new Intent(NewListSearch.this, NewListOption.class);
+                startActivity(intent);
             }
         });
     }
