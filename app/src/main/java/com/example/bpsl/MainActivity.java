@@ -46,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        MainButton = (Button) findViewById(R.id.findstoresbutton);
+        MainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
     }
