@@ -17,8 +17,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
 import java.util.Locale;
 import java.util.TimeZone;
+
+
 
 public class NewListDescription extends AppCompatActivity {
 
@@ -32,9 +35,11 @@ public class NewListDescription extends AppCompatActivity {
     TimePickerDialog tpd;
     Database myDb;
     EditText editTitle,editDate,editTime;
+
     public static String descriptionTitle;
     public static String descriptionDate;
     public static String descriptionTime;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +52,12 @@ public class NewListDescription extends AppCompatActivity {
         buttonDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 c = Calendar.getInstance(TimeZone.getTimeZone("GMT+12"),
                         Locale.getDefault());;
+
+
+
                 int day = c.get(Calendar.DAY_OF_MONTH);
                 int month = c.get(Calendar.MONTH);
                 int year = c.get(Calendar.YEAR);
@@ -57,6 +66,7 @@ public class NewListDescription extends AppCompatActivity {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                         int adjustMonth = month+1;
                         String setMonth = "";
                         String setDay = "";
@@ -76,6 +86,7 @@ public class NewListDescription extends AppCompatActivity {
                         dateTV.setText(setDay+"/"+setMonth+"/"+year);
                     }
                 }, year, month, day);
+
                 dpd.show();
             }
         });
@@ -95,6 +106,7 @@ public class NewListDescription extends AppCompatActivity {
                         String AMPM = "AM";
                         int realHour = 0;
                         String realMin = "";
+
                         if(hourOfDay >= 12){
                             AMPM = "PM";
                         }
@@ -107,6 +119,7 @@ public class NewListDescription extends AppCompatActivity {
                         if(hourOfDay == 0){
                             realHour = 12;
                         }
+
                         else {
                             realHour = hourOfDay;
                         }
@@ -122,6 +135,7 @@ public class NewListDescription extends AppCompatActivity {
                 tpd.show();
             }
         });
+
 
 
         Button button = (Button) findViewById(R.id.nextOfDescription);

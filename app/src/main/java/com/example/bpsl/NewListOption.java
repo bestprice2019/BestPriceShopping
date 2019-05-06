@@ -23,7 +23,9 @@ public class NewListOption extends AppCompatActivity {
         buttonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(NewListOption.this, NewListSave.class);
+
                 startActivity(intent);
             }
         });
@@ -32,7 +34,10 @@ public class NewListOption extends AppCompatActivity {
         buttonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(NewListOption.this, NewListSave.class);
+
+
                 startActivity(intent);
             }
         });
