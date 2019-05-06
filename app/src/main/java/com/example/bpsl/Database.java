@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import android.graphics.BitmapFactory;
 
 import java.io.BufferedReader;
@@ -18,7 +17,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Database extends SQLiteOpenHelper
 {
     //Constants for db name and version
@@ -27,14 +25,11 @@ public class Database extends SQLiteOpenHelper
 
     //Constants for identifying table and columns
     public static final String TABLE_NAME = "SHOPPING_LISTS";
-
     public static final String TABLE2_NAME = "ITEM";
-
     public static final String COL_1 = "ID";
     public static final String COL_2 = "TITLE";
     public static final String COL_3 = "DATE";
     public static final String COL_4 = "TIME";
-
     public static final String COL_5 = "TOTAL_PRICE";
     public static final String COL_22 = "SUPERMARKET";
     public static final String COL_23 = "ITEM_NAME";
@@ -64,13 +59,11 @@ public class Database extends SQLiteOpenHelper
             e.printStackTrace();
         }
 
-
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) //called first time DBOpenHelper class is instantiated
     {
-
         db.execSQL("CREATE TABLE "+TABLE_NAME+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE STRING,DATE STRING,TIME STRING,TOTAL_PRICE DOUBLE)");
         db.execSQL("CREATE TABLE "+TABLE2_NAME+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,SUPERMARKET STRING,ITEM_NAME VARCHAR(100),PRICE STRING)");
 
@@ -80,28 +73,23 @@ public class Database extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) //Can rebuild database with new structure
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-{
-
         db.execSQL("DROP TABLE IF EXISTS " + TABLE2_NAME);
         onCreate(db);
     }
 
     public boolean insertDataListTable(String title, String date, String time, Double total_price){
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,title);
         contentValues.put(COL_3,date);
         contentValues.put(COL_4,time);
-
-
+        contentValues.put(COL_5,total_price);
         long result = db.insert(TABLE_NAME,null ,contentValues);
         if(result == -1)
             return false;
         else
             return true;
     }
-
 
     public boolean insertDataItemTable(String supermarket, String item_name, String price){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -122,12 +110,10 @@ public class Database extends SQLiteOpenHelper
         return cursor;
     }
 
-
     public Cursor getAllItemData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursorTwo = db.rawQuery("select * from "+TABLE2_NAME,null);
         return cursorTwo;
     }
-
 
 }
