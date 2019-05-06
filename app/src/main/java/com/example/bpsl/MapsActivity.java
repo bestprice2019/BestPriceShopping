@@ -157,7 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //builds a URL for the api request
-    private String getUrl(double latitude, double longitude, String placeType) {
+    public String getUrl(double latitude, double longitude, String placeType) {
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googlePlacesUrl.append("location="+latitude+","+longitude);
         googlePlacesUrl.append("&radius="+10000);
@@ -165,10 +165,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&name="+placeType);
         googlePlacesUrl.append("&keyword="+placeType);
-        googlePlacesUrl.append("&key="+getResources().getString(R.string.browser_key));
+        googlePlacesUrl.append("&key=AIzaSyB4QKrFVweZXJN-gHiMl6lpYFASMAQ9-04");
         //example finished URL:
         //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-37.089951,174.9951966&radius=10000&type=grocery_or_supermarket&sensor=true&name=countdown&key=AIzaSyB4QKrFVweZXJN-gHiMl6lpYFASMAQ9-04
-        Log.d("getUrl",googlePlacesUrl.toString());
+//      Log.d("getUrl",googlePlacesUrl.toString());
         return googlePlacesUrl.toString();
     }
 
