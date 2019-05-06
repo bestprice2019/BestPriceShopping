@@ -4,28 +4,28 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="179dp"
-        android:layout_marginLeft="179dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginStart="151dp"
+        android:layout_marginLeft="151dp"
+        android:layout_marginTop="298dp"
         android:ems="10"
         android:inputType="date" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="177dp"
-        android:layout_marginLeft="177dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="368dp"
         android:ems="10"
         android:inputType="time" />
 
@@ -55,30 +55,55 @@
         android:text="Description"
         android:textSize="25dp"/>
 
-    <TextView
-        android:id="@+id/textDate"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/chooseDate"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="153dp"
-        android:text="Date"
-        android:textSize="20dp"/>
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="295dp"
+        android:text="Choose Date" />
+
+    <Button
+        android:id="@+id/chooseTime"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="364dp"
+        android:text="Choose Time" />
 
     <TextView
-        android:id="@+id/textTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/textReference"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginLeft="57dp"
-        android:layout_marginTop="246dp"
-        android:text="Time"
-        android:textSize="20dp"/>
+        android:layout_marginStart="29dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="233dp"
+        android:text="Reference"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/editTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="228dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
 
 </RelativeLayout>
