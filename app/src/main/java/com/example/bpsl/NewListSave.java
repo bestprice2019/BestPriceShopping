@@ -40,12 +40,14 @@ public class NewListSave extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(NewListSave.this, SavedList.class);
                 startActivity(intent);
+
                 boolean inserting = myDb.insertDataListTable(NLD.descriptionTitle, NLD.descriptionDate,
                         NLD.descriptionTime, finalTotal);
                 if(inserting = true)
                     Toast.makeText(NewListSave.this,"New LIst is saved.",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(NewListSave.this,"Saving Error!",Toast.LENGTH_LONG).show();
+
             }
         });
 

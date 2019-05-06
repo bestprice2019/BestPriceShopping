@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+
+
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class SavedList extends AppCompatActivity {
 
@@ -28,9 +31,11 @@ public class SavedList extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.savelist);
+
         myDb = new Database(this);
         Cursor cursor = myDb.getAllData();
         if (cursor.getCount() == 0) {
+
             displayString = "No Data.";
             return;
         } else {
@@ -40,12 +45,15 @@ public class SavedList extends AppCompatActivity {
                 buffer.append("Title:" + cursor.getString(1) + "\n");
                 buffer.append("Date:" + cursor.getString(2) + "\n");
                 buffer.append("Time:" + cursor.getString(3) + "\n");
+
                 buffer.append("Total Price:"+ cursor.getString(4)+ "$\n");
                 buffer.append("\n");
             }
 
             displayString = buffer.toString();
         }
+
+
 
         TextView textView = (TextView) findViewById(R.id.textViewSavedList);
         textView.setMovementMethod(new ScrollingMovementMethod());
@@ -59,6 +67,7 @@ public class SavedList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 }

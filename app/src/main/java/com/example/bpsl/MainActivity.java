@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
+
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -22,11 +23,14 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private Button MainButton;
+
     Database myDb;
     NewListSearch search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        MainButton = (Button) findViewById(R.id.findstoresbutton);
+        MainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 

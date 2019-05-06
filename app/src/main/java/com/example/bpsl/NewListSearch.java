@@ -1,6 +1,8 @@
 package com.example.bpsl;
 
+
 import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -59,6 +61,7 @@ public class NewListSearch extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id)  {
                 AlertDialog.Builder builder = new AlertDialog.Builder(NewListSearch.this);
                 builder.setMessage("Do you want to put this item into the list?").setCancelable(false)
@@ -95,6 +98,7 @@ public class NewListSearch extends AppCompatActivity {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             }
         });
 
