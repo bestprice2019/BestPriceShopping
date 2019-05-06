@@ -10,43 +10,43 @@ import android.widget.Button;
 
 public class NewListOption extends AppCompatActivity {
 
-    private Button button;
+    private Button buttonOne;
+    private Button buttonTwo;
+    private Button buttonThree;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlistoption);
 
-        button = (Button) findViewById(R.id.buttonOptionOne);
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonOne = (Button) findViewById(R.id.buttonOptionOne);
+        buttonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewListSave(v);
+                Intent intent = new Intent(NewListOption.this, NewListSave.class);
+                startActivity(intent);
             }
         });
 
-        button = (Button) findViewById(R.id.buttonOptionTwo);
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonTwo = (Button) findViewById(R.id.buttonOptionTwo);
+        buttonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewListSave(v);
+                Intent intent = new Intent(NewListOption.this, NewListSave.class);
+                startActivity(intent);
             }
         });
 
-        button = (Button) findViewById(R.id.buttonOptionThree);
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonThree = (Button) findViewById(R.id.buttonOptionThree);
+        buttonThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNewListSave(v);
+                Intent intent = new Intent(v.getContext(), NewListSave.class);
+                startActivity(intent);
             }
         });
     }
 
-    public void openNewListSave(View v){
-        Intent intent = new Intent(v.getContext(), NewListSave.class);
-        startActivity(intent);
-
-    }
 
 
     @Override
