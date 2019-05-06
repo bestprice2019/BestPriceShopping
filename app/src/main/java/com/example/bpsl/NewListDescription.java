@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
+
+import java.util.Locale;
+import java.util.TimeZone;
+
 
 public class NewListDescription extends AppCompatActivity {
 
@@ -30,6 +36,12 @@ public class NewListDescription extends AppCompatActivity {
     Database myDb;
     EditText editTitle,editDate,editTime;
 
+
+    public static String descriptionTitle;
+    public static String descriptionDate;
+    public static String descriptionTime;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +53,11 @@ public class NewListDescription extends AppCompatActivity {
         buttonDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                c = Calendar.getInstance();
+
+
+                c = Calendar.getInstance(TimeZone.getTimeZone("GMT+12"),
+                        Locale.getDefault());;
+
                 int day = c.get(Calendar.DAY_OF_MONTH);
                 int month = c.get(Calendar.MONTH);
                 int year = c.get(Calendar.YEAR);
@@ -50,9 +66,26 @@ public class NewListDescription extends AppCompatActivity {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateTV.setText(dayOfMonth+"/"+month+"/"+year);
+
+                        int adjustMonth = month+1;
+                        String setMonth = "";
+                        String setDay = "";
+                        if(dayOfMonth <10){
+                            setDay = "0"+dayOfMonth;
+                        }
+                        else{
+                            setDay = Integer.toString(dayOfMonth);
+                        }
+
+                        if(adjustMonth <10){
+                            setMonth = "0"+month;
+                        }
+                        else{
+                            setMonth = Integer.toString(adjustMonth);
+                        }
+                        dateTV.setText(setDay+"/"+setMonth+"/"+year);
                     }
-                }, 2019, 4, 3);
+                }, year, month, day);
                 dpd.show();
             }
         });
@@ -72,15 +105,21 @@ public class NewListDescription extends AppCompatActivity {
                         String AMPM = "AM";
                         int realHour = 0;
                         String realMin = "";
-                        if(hourOfDay > 11){
+
+
+                        if(hourOfDay >= 12){
                             AMPM = "PM";
                         }
                         else {
-
+                            AMPM = "AM";
                         }
-                        if(hourOfDay > 12){
+                        if(hourOfDay >= 13){
                             realHour = hourOfDay - 12;
                         }
+                        if(hourOfDay == 0){
+                            realHour = 12;
+                        }
+
                         else {
                             realHour = hourOfDay;
                         }
@@ -97,24 +136,25 @@ public class NewListDescription extends AppCompatActivity {
             }
         });
 
-        editTitle = (EditText) findViewById(R.id.editTitle);
-        editDate = (EditText) findViewById(R.id.editDate);
-        editTime = (EditText) findViewById(R.id.editTime);
+
 
         Button button = (Button) findViewById(R.id.nextOfDescription);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                setContentView(R.layout.newlistsearch);
+                descriptionTitle = "Hi";
+                editTitle = (EditText) findViewById(R.id.editTitle);
+                editDate = (EditText) findViewById(R.id.editDate);
+                editTime = (EditText) findViewById(R.id.editTime);
+                descriptionTitle = editTitle.getText().toString();
+                Log.d("TAG",descriptionTitle);
+                descriptionDate = editDate.getText().toString();
+                Log.d("TAG",descriptionDate);
+                descriptionTime = editTime.getText().toString();
+                Log.d("TAG",descriptionTime);
                 Intent intent = new Intent(v.getContext(),NewListSearch.class);
                 startActivity(intent);
-                boolean inserting = myDb.insertData(editTitle.getText().toString(),
-                        editDate.getText().toString(),
-                        editTime.getText().toString());
-                if(inserting = true)
-                    Toast.makeText(NewListDescription.this,"Data Inserted",Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(NewListDescription.this,"Data Inserted Error",Toast.LENGTH_LONG).show();
+
             }
         });
     }
