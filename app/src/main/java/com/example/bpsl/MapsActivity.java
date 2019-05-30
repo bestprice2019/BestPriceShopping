@@ -168,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&name="+placeType);
         googlePlacesUrl.append("&keyword="+placeType);
-        googlePlacesUrl.append("&key=AIzaSyB4QKrFVweZXJN-gHiMl6lpYFASMAQ9-04");
+        googlePlacesUrl.append("&key="+getString(R.string.google_maps_key));
         //example finished URL:
         //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-37.089951,174.9951966&radius=10000&type=grocery_or_supermarket&sensor=true&name=countdown&key=AIzaSyB4QKrFVweZXJN-gHiMl6lpYFASMAQ9-04
 //      Log.d("getUrl",googlePlacesUrl.toString());
