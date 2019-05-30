@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/TVtitle"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -32,12 +32,12 @@
         android:layout_marginLeft="68dp"
         android:layout_marginTop="92dp"
         android:text="title"
-        android:textSize="16dp" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/TVdate"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -45,12 +45,12 @@
         android:layout_marginLeft="68dp"
         android:layout_marginTop="202dp"
         android:text="date"
-        android:textSize="15dp"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/TVtime"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -58,12 +58,12 @@
         android:layout_marginLeft="68dp"
         android:layout_marginTop="319dp"
         android:text="time"
-        android:textSize="15dp"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/TVtotal"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -72,5 +72,5 @@
         android:layout_marginTop="428dp"
         android:layout_marginBottom="217dp"
         android:text="total"
-        android:textSize="15dp" />
+        android:textSize="20dp" />
 </RelativeLayout>

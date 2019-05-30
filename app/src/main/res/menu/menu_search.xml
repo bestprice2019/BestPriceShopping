@@ -8,4 +8,16 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always|collapseActionView"/>
+    <item
+        android:id="@+id/app-bar-next"
+        app:actionViewClass="android.widget.Button"
+        android:title="Next" />
+    <item
+        android:id="@+id/app-bar-back"
+        app:actionViewClass="android.widget.Button"
+        android:title="Back" />
+    <item
+        android:id="@+id/app-bar-mainMenu"
+        app:actionViewClass="android.widget.Button"
+        android:title="Main Menu" />
 </menu>

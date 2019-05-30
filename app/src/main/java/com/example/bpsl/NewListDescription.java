@@ -14,13 +14,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
+
 import java.util.Locale;
 import java.util.TimeZone;
-
 
 
 public class NewListDescription extends AppCompatActivity {
@@ -29,12 +28,12 @@ public class NewListDescription extends AppCompatActivity {
     TextView timeTV;
     Button buttonDate;
     Button buttonTime;
-    Button buttonNext;
     Calendar c;
     DatePickerDialog dpd;
     TimePickerDialog tpd;
     Database myDb;
     EditText editTitle,editDate,editTime;
+
 
     public static String descriptionTitle;
     public static String descriptionDate;
@@ -53,10 +52,9 @@ public class NewListDescription extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 c = Calendar.getInstance(TimeZone.getTimeZone("GMT+12"),
                         Locale.getDefault());;
-
-
 
                 int day = c.get(Calendar.DAY_OF_MONTH);
                 int month = c.get(Calendar.MONTH);
@@ -86,7 +84,6 @@ public class NewListDescription extends AppCompatActivity {
                         dateTV.setText(setDay+"/"+setMonth+"/"+year);
                     }
                 }, year, month, day);
-
                 dpd.show();
             }
         });
@@ -106,6 +103,7 @@ public class NewListDescription extends AppCompatActivity {
                         String AMPM = "AM";
                         int realHour = 0;
                         String realMin = "";
+
 
                         if(hourOfDay >= 12){
                             AMPM = "PM";
@@ -142,7 +140,6 @@ public class NewListDescription extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                descriptionTitle = "Hi";
                 editTitle = (EditText) findViewById(R.id.editTitle);
                 editDate = (EditText) findViewById(R.id.editDate);
                 editTime = (EditText) findViewById(R.id.editTime);

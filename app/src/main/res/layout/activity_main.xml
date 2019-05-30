@@ -23,11 +23,14 @@
 
     <Button
         android:id="@+id/newlistbutton"
-        android:layout_width="195dp"
+        android:layout_width="189dp"
         android:layout_height="67dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="310dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="143dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
         android:text="New List"
         android:textSize="20dp" />
 
@@ -36,9 +39,25 @@
         android:layout_width="181dp"
         android:layout_height="58dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="433dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="269dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginRight="118dp"
         android:text="Saved lists"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/findstoresbutton"
+        android:layout_width="181dp"
+        android:layout_height="58dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:text="Find Stores"
         android:textSize="20dp" />
 
 

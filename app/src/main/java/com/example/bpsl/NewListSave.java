@@ -14,16 +14,20 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.bpsl.NewListDescription.descriptionDate;
+import static com.example.bpsl.NewListDescription.descriptionTime;
+import static com.example.bpsl.NewListDescription.descriptionTitle;
+
 public class NewListSave extends AppCompatActivity {
 
     private Button button;
     Database myDb;
-    NewListDescription NLD = new NewListDescription();
     TextView TVtitle,TVdate,TVtime,TVtotal;
-    NewListSearch NLS = new NewListSearch();
+    NewListSearch NLSearch = new NewListSearch();
     public double descriptionTotal;
     public double finalTotal;
-    List<Item> myCart = new ArrayList<>();
+    public static int id = 0;
+    SavedListSecond savedListSecond = new SavedListSecond();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,31 +36,47 @@ public class NewListSave extends AppCompatActivity {
         myDb = new Database(this);
 
         DecimalFormat df = new DecimalFormat("####0.00");
-        finalTotal = Double.parseDouble(df.format(this.calculateTotal(NLS.cart)));
+        finalTotal = Double.parseDouble(df.format(this.calculateTotal(NLSearch.cart)));
 
         button = (Button) findViewById(R.id.buttonSave);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewListSave.this, SavedList.class);
+                id++;
+                String realID = Integer.toString(id);
+                ArrayList<Item> myCart = new ArrayList<>();
+//                myCart=NLSearch.cart;
+
+                for(Item temp:NLSearch.cart){
+                    myCart.add(temp);
+                }
+
+                boolean inserting = savedListSecond.listOfShoppingList.add(new ShoppingList(realID,descriptionTitle,descriptionDate,descriptionTime,Double.toString(finalTotal),myCart,"Location"));
+                NLSearch.cart.clear();
+                Intent intent = new Intent(NewListSave.this, SavedListSecond.class);
                 startActivity(intent);
-                boolean inserting = myDb.insertDataListTable(NLD.descriptionTitle, NLD.descriptionDate,
-                        NLD.descriptionTime, finalTotal);
+
+//                boolean inserting =
+                        myDb.insertDataListTable(descriptionTitle, descriptionDate,
+                        descriptionTime, finalTotal);
                 if(inserting = true)
                     Toast.makeText(NewListSave.this,"New LIst is saved.",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(NewListSave.this,"Saving Error!",Toast.LENGTH_LONG).show();
+
+
+
             }
         });
 
         TVtitle = (TextView)findViewById(R.id.TVtitle);
-        TVtitle.setText("REFERENCE:"+NLD.descriptionTitle);
+        TVtitle.setText("REFERENCE:"+ descriptionTitle);
 
         TVdate = (TextView)findViewById(R.id.TVdate);
-        TVdate.setText("DATE:"+NLD.descriptionDate);
+        TVdate.setText("DATE:"+ descriptionDate);
 
         TVtime = (TextView)findViewById(R.id.TVtime);
-        TVtime.setText("TIME:"+NLD.descriptionTime);
+        TVtime.setText("TIME:"+ descriptionTime);
 
         TVtotal = (TextView)findViewById(R.id.TVtotal);
         TVtotal.setText("TOTAL PRICE:"+Double.toString(finalTotal)+"$");

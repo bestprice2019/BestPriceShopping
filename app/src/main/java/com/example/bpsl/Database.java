@@ -91,6 +91,7 @@ public class Database extends SQLiteOpenHelper
             return true;
     }
 
+
     public boolean insertDataItemTable(String supermarket, String item_name, String price){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentItems = new ContentValues();
@@ -103,7 +104,6 @@ public class Database extends SQLiteOpenHelper
         else
             return true;
     }
-
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from "+TABLE_NAME,null);
