@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.example.bpsl.Remote.IGoogleAPIService;
 import com.example.bpsl.model.MyPlaces;
 import com.example.bpsl.model.Results;
@@ -53,6 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double latitude,longitude;
     private Location mLastLocation;
     private Marker mMarker;
+    private Marker userMarker;
     private LocationRequest mLocationRequest;
 
     IGoogleAPIService mService;
@@ -128,6 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //fullList.position(latLng);
                                 markerOptions.position(latLng);
                                 markerOptions.title(placeName);
+                                markerOptions.snippet(vicinity);
                                 if(placeType.equals("countdown"))
                                     //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -225,10 +228,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+                mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        System.out.println("MARKER CLICKED");
+                        if (userMarker != null) {
+                            getDirectionsURL(userMarker.getPosition(),marker.getPosition(), "driving");
+
+                        }
+                        return false;
+
+                    }
+                });
             }
             else {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+                mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        System.out.println("MARKER CLICKED");
+                        if (userMarker != null) {
+                            getDirectionsURL(userMarker.getPosition(),marker.getPosition(), "driving");
+
+                        }
+                        return false;
+
+                    }
+                });
             }
         }
     }
@@ -271,6 +298,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(mMarker != null)
             mMarker.remove();
 
+
         latitude = location.getLatitude();
         longitude = location.getLongitude();
 
@@ -281,6 +309,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
 
         mMarker = mMap.addMarker(markerOptions);
+        userMarker = mMarker;
 
         //Move camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -289,4 +318,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(mGoogleApiClient !=  null)
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
     }
+
+
+
+    private String getDirectionsURL(LatLng origin, LatLng dest, String directionMode) {
+        //Origin of route
+        String str_origin = "origin=" +origin.latitude +","+origin.longitude;
+        //destinate of route
+        String str_dest = "destination=" +dest.latitude+","+dest.longitude;
+        //mode
+        String mode = "mode=" +directionMode;
+        //building parameters to the web service
+        String parameters = str_origin+"&"+str_dest+"&"+mode;
+        //output format
+        String output = "json";
+        //Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters+"&key="+getString(R.string.google_maps_key);
+        System.out.println("DIRECTIONS URL: "+url);
+        return url;
+    }
+
+
 }
