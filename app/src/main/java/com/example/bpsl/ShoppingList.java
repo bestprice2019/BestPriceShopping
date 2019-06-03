@@ -7,11 +7,11 @@ public class ShoppingList {
     private String title;
     private String date;
     private String time;
-    private String total_price;
+    private Double total_price;
     private ArrayList<Item> list;
     private String direction;
 
-    public ShoppingList(String id, String title, String date, String time, String total_price, ArrayList<Item> list, String direction) {
+    public ShoppingList(String id, String title, String date, String time, Double total_price, ArrayList<Item> list, String direction) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -53,11 +53,11 @@ public class ShoppingList {
         this.time = time;
     }
 
-    public String getTotal_price() {
+    public Double getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(String total_price) {
+    public void setTotal_price(Double total_price) {
         this.total_price = total_price;
     }
 
@@ -78,6 +78,6 @@ public class ShoppingList {
     }
 
     public String toString(){
-        return "ID:"+this.getId()+"\nTITLE:"+this.getTitle()+"\nDATE;"+this.getDate()+"\nTIME:"+this.getTime()+"\nDirection:"+this.getDirection();
+        return "ID:"+this.getId()+"\nTITLE:"+this.getTitle()+"\nDATE:"+this.getDate()+"\nTIME:"+this.getTime()+"\nTotal Price:"+this.getTotal_price()+"$\nDirection:"+this.getDirection();
     }
 }
