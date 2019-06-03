@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/quantum_white_100"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/editDateSL"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="208dp"
+        android:layout_marginLeft="208dp"
+        android:layout_marginTop="243dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textColor="@color/quantum_googgreen400" />
+
+    <EditText
+        android:id="@+id/editTimeSL"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="208dp"
+        android:layout_marginLeft="208dp"
+        android:layout_marginTop="359dp"
+        android:ems="10"
+        android:inputType="time"
+        android:textColor="@color/quantum_googgreen400" />
+
+    <Button
+        android:id="@+id/DoneEditSL"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="71dp"
+        android:layout_marginRight="71dp"
+        android:layout_marginBottom="77dp"
+        android:background="@drawable/round"
+        android:text="Done Editing"
+        android:textColor="@color/quantum_googgreen400"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/chooseDateSL"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginLeft="154dp"
+        android:layout_marginTop="244dp"
+        android:background="@drawable/round"
+        android:text="Click"
+        android:textColor="@color/quantum_googgreen400" />
+
+    <Button
+        android:id="@+id/chooseTimeSL"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginLeft="154dp"
+        android:layout_marginTop="354dp"
+        android:background="@drawable/round"
+        android:text="Click"
+        android:textColor="@color/quantum_googgreen400" />
+
+    <TextView
+        android:id="@+id/textReferenceSL"
+        android:layout_width="135dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="159dp"
+        android:text="REFERENCE"
+        android:textAlignment="center"
+        android:textColor="@color/quantum_googgreen400"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/textDateSL"
+        android:layout_width="92dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginTop="257dp"
+        android:text="DATE"
+        android:textAlignment="center"
+        android:textColor="@color/quantum_googgreen400"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/textTimeSL"
+        android:layout_width="81dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="363dp"
+        android:text="TIME"
+        android:textAlignment="center"
+        android:textColor="@color/quantum_googgreen400"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/editTitleSL"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColor="@color/quantum_googgreen400" />
+
+</RelativeLayout>

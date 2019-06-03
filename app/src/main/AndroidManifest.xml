@@ -33,7 +33,7 @@
         <!--Activate MainActivity class-->
         <activity
             android:name=".MainActivity"
-            android:label="Main Menu"
+            android:label="Best Price Shopping List"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

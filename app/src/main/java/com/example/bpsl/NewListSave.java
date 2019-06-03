@@ -101,19 +101,19 @@ public class NewListSave extends AppCompatActivity {
         });
 
         TVtitle = (TextView)findViewById(R.id.TVtitle);
-        TVtitle.setText("REFERENCE:"+ descriptionTitle);
+        TVtitle.setText("REFERENCE: "+ descriptionTitle);
 
         TVdate = (TextView)findViewById(R.id.TVdate);
-        TVdate.setText("DATE:"+ descriptionDate);
+        TVdate.setText("DATE: "+ descriptionDate);
 
         TVtime = (TextView)findViewById(R.id.TVtime);
-        TVtime.setText("TIME:"+ descriptionTime);
+        TVtime.setText("TIME: "+ descriptionTime);
 
         TVtotal = (TextView)findViewById(R.id.TVtotal);
-        TVtotal.setText("TOTAL PRICE:"+finalTotal+"$");
+        TVtotal.setText("TOTAL PRICE: $"+finalTotal);
 
         TVdirection = (TextView)findViewById(R.id.TVdirection);
-        TVdirection.setText("DIRECTION:"+supermarket+".");
+        TVdirection.setText("SUPERMARKET: "+supermarket+".");
     }
 
 

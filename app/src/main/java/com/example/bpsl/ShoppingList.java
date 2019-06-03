@@ -78,6 +78,6 @@ public class ShoppingList {
     }
 
     public String toString(){
-        return "ID:"+this.getId()+"\nTITLE:"+this.getTitle()+"\nDATE:"+this.getDate()+"\nTIME:"+this.getTime()+"\nTotal Price:"+this.getTotal_price()+"$\nDirection:"+this.getDirection();
+        return "ID:"+this.getId()+"\nTITLE:"+this.getTitle()+"\nDATE:"+this.getDate()+"\nTIME:"+this.getTime()+"\nTotal Price:"+this.getTotal_price()+"$\nSupermarket:"+this.getDirection();
     }
 }
