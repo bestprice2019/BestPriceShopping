@@ -3,9 +3,9 @@ package com.example.bpsl;
 public class Item {
     private String supermarket;
     private String item_name;
-    private String price;
+    private Double price;
 
-    public Item(String supermarket, String item_name, String price) {
+    public Item(String supermarket, String item_name, Double price) {
         this.supermarket = supermarket;
         this.item_name = item_name;
         this.price = price;
@@ -27,15 +27,15 @@ public class Item {
         this.item_name = item_name;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     public String toString(){
-        return "Supermarket:"+this.getSupermarket()+"\nItem:"+this.getItem_name()+"\nPrice:"+this.getPrice()+"$";
+        return "Supermarket:"+this.getSupermarket()+"\nItem:"+this.getItem_name()+"\nPrice:$"+this.getPrice();
     }
 }

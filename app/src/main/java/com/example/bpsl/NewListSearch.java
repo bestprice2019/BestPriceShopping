@@ -27,36 +27,23 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class allows the users to search and add the items into the shopping list.
+ */
 public class NewListSearch extends AppCompatActivity {
 
     ListView listView;
     public static ArrayList<Item> cart = new ArrayList<>();
-
-    ArrayList<Item> list = new ArrayList<>();
+    ArrayList<Item> tempList = new ArrayList<>();
 
     ArrayList<Item> displayList = new ArrayList<>();
+    MainActivity mainForSearch = new MainActivity();
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlistsearch);
-
-        InputStream in = getResources().openRawResource(R.raw.itemfinal);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(in, Charset.forName("UTF-8"))
-        );
-
-        String line ="";
-        try{while((line = reader.readLine())!=null){
-            String[] tokens = line.split(",");
-            Item aItem = new Item(tokens[0],tokens[1],tokens[2]);
-            list.add(aItem);
-        }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
         listView = (ListView) findViewById(R.id.LVSearch);
         ArrayAdapter<Item> adapter = new ArrayAdapter<>(this,R.layout.newlistsearch,R.id.textViewSearch,displayList);
@@ -77,25 +64,9 @@ public class NewListSearch extends AppCompatActivity {
                         .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                cart.add(list.get(position));
-//                                AlertDialog.Builder builderTwo = new AlertDialog.Builder(NewListSearch.this);
-//                                builderTwo.setMessage("Do you still want to add your list?").setCancelable(false)
-//                                        .setPositiveButton("No", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//                                                Intent intent = new Intent(NewListSearch.this, NewListSave.class);
-//                                                startActivity(intent);
-//                                            }
-//
-//                                        })
-//                                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//
-//                                            }
-//                                        });
-//                                AlertDialog alertTwo = builderTwo.create();
-//                                alertTwo.show();
+
+                                cart.add(tempList.get(position));
+
                             }
                         });
                 AlertDialog alert = builder.create();
@@ -115,19 +86,6 @@ public class NewListSearch extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
 
-//        MenuItem nextButton = menu.findItem(R.id.app_bar_next);
-//        nextButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//
-//            @Override
-//            public boolean onMenuItemClick(MenuItem menuItem) {
-//                Intent intent = new Intent(NewListSearch.this, NewListSave.class);
-//                startActivity(intent);
-//                return false;
-//            }
-//
-//
-//        });
-
         //instantiate MenuItem and assign the item from the menu_search.xml
         MenuItem searchItem = menu.findItem(R.id.app_bar_search);
         //instantiate SearchView, this will change the search list as the user enters letters
@@ -146,10 +104,10 @@ public class NewListSearch extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String searchText) {
                 //create the temporary list for searched items
-                ArrayList<Item> tempList = new ArrayList<>();
 
+                tempList.clear();
                 //search's the whole list and put each item into the temporary list.
-                for(Item temp : list){
+                for(Item temp : mainForSearch.mainList){
                     if(temp.getItem_name().toLowerCase().contains(searchText.toLowerCase())){
                         tempList.add(temp);
                     }
@@ -171,8 +129,29 @@ public class NewListSearch extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.app_bar_next){
+            if(cart.size()<=0){
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewListSearch.this);
+                builder.setMessage("There is no item in the shopping. Would you like to leave?").setCancelable(true)
+                        .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+
+                        })
+                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent nextIntent = new Intent(NewListSearch.this,MainActivity.class);
+                                startActivity(nextIntent);
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+            else {
             Intent nextIntent = new Intent(NewListSearch.this,NewListSave.class);
-            startActivity(nextIntent);
+            startActivity(nextIntent);}
             return false;
         }
         if(id == R.id.app_bar_back){

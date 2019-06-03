@@ -6,16 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.BitmapFactory;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Database extends SQLiteOpenHelper
 {
@@ -40,26 +35,7 @@ public class Database extends SQLiteOpenHelper
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void readItemText(){
 
-
-        try {
-            BufferedReader in = new BufferedReader(
-                    new FileReader("C:\\Users\\zawli\\AndroidStudioProjects\\BPSL\\ItemFinalNoSpaceForDatabase"));
-            String line;
-
-            while ((line = in.readLine())!= null) {
-                String[] tokens=line.split(",");
-                insertDataItemTable(tokens[0],tokens[1],tokens[2]);
-            }
-            in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public void onCreate(SQLiteDatabase db) //called first time DBOpenHelper class is instantiated
@@ -77,6 +53,7 @@ public class Database extends SQLiteOpenHelper
         onCreate(db);
     }
 
+    //to insert data into list table
     public boolean insertDataListTable(String title, String date, String time, Double total_price){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -92,6 +69,7 @@ public class Database extends SQLiteOpenHelper
     }
 
 
+    //to insert data into item table
     public boolean insertDataItemTable(String supermarket, String item_name, String price){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentItems = new ContentValues();
@@ -104,12 +82,15 @@ public class Database extends SQLiteOpenHelper
         else
             return true;
     }
+
+    //to get all data from list table
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from "+TABLE_NAME,null);
         return cursor;
     }
 
+    //to get all item data from item table
     public Cursor getAllItemData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursorTwo = db.rawQuery("select * from "+TABLE2_NAME,null);

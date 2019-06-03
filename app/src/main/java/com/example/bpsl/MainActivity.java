@@ -9,16 +9,21 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import com.example.bpsl.R;
 
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Button MainButton;
+    public static int stopperMain = 0;
+    public static ArrayList<Item> mainList = new ArrayList<>();
 
-//    Database myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //to get item data from the itemrealdata.csv file
+        if(stopperMain ==0) {
+            InputStream in = getResources().openRawResource(R.raw.itemrealdata);
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(in, Charset.forName("UTF-8"))
+            );
+
+            String line = "";
+            try {
+                while ((line = reader.readLine()) != null) {
+                    String[] tokens = line.split(",");
+                    String price = tokens[2];
+
+                    Item aItem = new Item(tokens[0], tokens[1], Double.parseDouble(tokens[2]));
+                    mainList.add(aItem);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+
+        }
+        //let the main activity read the csv file only once
+        stopperMain++;
 
         MainButton = (Button) findViewById(R.id.newlistbutton);
         MainButton.setOnClickListener(new View.OnClickListener() {
@@ -61,24 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-//    public void getItem(){
-//        myDb = new Database(this);
-//        InputStream in = getResources().openRawResource(R.raw.ten);
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(in, Charset.forName("UTF-8"))
-//        );
-//
-//        String line ="";
-//        try{while((line = reader.readLine())!=null){
-//            String[] tokens = line.split(",");
-//            myDb.insertDataItemTable(tokens[0],tokens[1],tokens[2]);
-//        }
-//        }catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 
 
     @Override

@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/quantum_white_100"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/buttonSave"
@@ -13,10 +15,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="95dp"
-        android:layout_marginRight="95dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/round"
         android:text="Save"
+        android:textColor="@color/quantum_googgreen400"
         android:textSize="20dp"
         tools:layout_editor_absoluteX="263dp"
         tools:layout_editor_absoluteY="605dp" />
@@ -24,44 +28,60 @@
     <TextView
         android:id="@+id/TVtitle"
         android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
-        android:layout_marginTop="92dp"
-        android:text="title"
-        android:textSize="20dp" />
+        android:layout_marginTop="40dp"
+        android:text="REFERENCE:"
+        android:textColor="@color/quantum_googgreen400"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/TVdate"
         android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
-        android:layout_marginTop="202dp"
-        android:text="date"
-        android:textSize="20dp"/>
+        android:layout_marginTop="110dp"
+        android:text="DATE:"
+        android:textSize="18dp"
+        android:textColor="@color/quantum_googgreen400"/>
 
     <TextView
         android:id="@+id/TVtime"
         android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
-        android:layout_marginTop="319dp"
-        android:text="time"
-        android:textSize="20dp"/>
+        android:layout_marginTop="180dp"
+        android:text="TIME"
+        android:textSize="18dp"
+        android:textColor="@color/quantum_googgreen400"/>
 
     <TextView
         android:id="@+id/TVtotal"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="250dp"
+        android:text="TOTAL"
+        android:textSize="18dp"
+        android:textColor="@color/quantum_googgreen400"/>
+    <TextView
+        android:id="@+id/TVdirection"
         android:layout_width="250dp"
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
@@ -69,8 +89,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="68dp"
         android:layout_marginLeft="68dp"
-        android:layout_marginTop="428dp"
-        android:layout_marginBottom="217dp"
-        android:text="total"
-        android:textSize="20dp" />
+        android:layout_marginTop="320dp"
+        android:text="DIRECTION"
+        android:textSize="18dp"
+        android:textColor="@color/quantum_googgreen400"/>
 </RelativeLayout>
