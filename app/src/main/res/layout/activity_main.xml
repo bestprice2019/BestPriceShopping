@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/logos"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -23,34 +25,61 @@
 
     <Button
         android:id="@+id/newlistbutton"
-        android:layout_width="195dp"
+        android:layout_width="189dp"
         android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="310dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="111dp"
+        android:layout_marginLeft="111dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginRight="111dp"
+        android:background="@drawable/round"
         android:text="New List"
+        android:textColor="@color/quantum_googgreen400"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/savedbutton"
-        android:layout_width="181dp"
-        android:layout_height="58dp"
+        android:layout_width="189dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="433dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="111dp"
+        android:layout_marginLeft="111dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginRight="111dp"
+        android:background="@drawable/round"
         android:text="Saved lists"
+        android:textColor="@color/quantum_googgreen400"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/findstoresbutton"
-        android:layout_width="181dp"
-        android:layout_height="58dp"
+        android:layout_width="189dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="600dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="111dp"
+        android:layout_marginLeft="111dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginRight="111dp"
+        android:background="@drawable/round"
         android:text="Find Stores"
-        android:textSize="20dp"
-        />
+        android:textColor="@color/quantum_googgreen400"
+        android:textSize="20dp" />
+
 
 
 </RelativeLayout>

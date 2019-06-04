@@ -14,7 +14,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -29,23 +28,23 @@ public class NewListDescription extends AppCompatActivity {
     TextView timeTV;
     Button buttonDate;
     Button buttonTime;
-    Button buttonNext;
     Calendar c;
     DatePickerDialog dpd;
     TimePickerDialog tpd;
     Database myDb;
-    EditText editTitle,editDate,editTime;
-
-
+    public static EditText editTitle,editDate,editTime;
     public static String descriptionTitle;
     public static String descriptionDate;
     public static String descriptionTime;
 
 
+    //When this class is activated, it instantiates all varibles and sets the layout
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newlistdescription);
+
+
         myDb = new Database(this);
 
         dateTV = (TextView) findViewById(R.id.editDate);
@@ -119,8 +118,7 @@ public class NewListDescription extends AppCompatActivity {
                         if(hourOfDay == 0){
                             realHour = 12;
                         }
-
-                        else {
+                        if(hourOfDay <13){
                             realHour = hourOfDay;
                         }
                         if(minute < 10){
@@ -138,25 +136,28 @@ public class NewListDescription extends AppCompatActivity {
 
 
 
-        Button button = (Button) findViewById(R.id.nextOfDescription);
-        button.setOnClickListener(new View.OnClickListener() {
+        editTitle = (EditText) findViewById(R.id.editTitle);
+        editDate = (EditText) findViewById(R.id.editDate);
+        editTime = (EditText) findViewById(R.id.editTime);
+        Button buttonNextOfDescription = (Button) findViewById(R.id.nextOfDescription);
+        buttonNextOfDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                descriptionTitle = "Hi";
-                editTitle = (EditText) findViewById(R.id.editTitle);
-                editDate = (EditText) findViewById(R.id.editDate);
-                editTime = (EditText) findViewById(R.id.editTime);
+
                 descriptionTitle = editTitle.getText().toString();
-                Log.d("TAG",descriptionTitle);
+//                Log.d("TAG",descriptionTitle);
                 descriptionDate = editDate.getText().toString();
-                Log.d("TAG",descriptionDate);
+//                Log.d("TAG",descriptionDate);
                 descriptionTime = editTime.getText().toString();
-                Log.d("TAG",descriptionTime);
+//                Log.d("TAG",descriptionTime);
                 Intent intent = new Intent(v.getContext(),NewListSearch.class);
                 startActivity(intent);
 
             }
         });
+        editTitle.setText(descriptionTitle);
+        editDate.setText(descriptionDate);
+        editTime.setText(descriptionTime);
     }
 
     @Override

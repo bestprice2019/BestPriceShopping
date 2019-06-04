@@ -30,10 +30,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
+        <!--Activate MainActivity class-->
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="Best Price Shopping List"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,30 +41,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--Activate Other classes-->
         <activity
             android:name=".NewListDescription"
-            android:label="@string/app_name"></activity>
+            android:label="Description"></activity>
         <activity
             android:name=".NewListSearch"
-            android:label="@string/app_name"></activity>
-        <activity
-            android:name=".NewListOption"
-            android:label="@string/app_name"></activity>
+            android:label="Search"></activity>
         <activity
             android:name=".NewListSave"
-            android:label="@string/app_name"></activity>
+            android:label="Saving New List"></activity>
         <activity
-            android:name=".SavedList"
-            android:label="@string/app_name"></activity>
-
+            android:name=".SavedListSecond"
+            android:label="Saved Lists"></activity>
+        <activity
+            android:name=".ListEdit"
+            android:label="Editing Shopping List"></activity>
+        <activity
+            android:name=".AddForSaveList"
+            android:label="Add"></activity>
+        <activity
+            android:name=".NewListEdit"
+            android:label="Editing List"></activity>
+        <activity
+            android:name=".EditSaveListDescription"
+            android:label="Editing Description"></activity>
         <activity
             android:name=".MapsActivity"
-            android:label="BPSL">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            android:label="Maps">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
     </application>
 

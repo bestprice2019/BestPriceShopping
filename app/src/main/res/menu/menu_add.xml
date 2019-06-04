@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/app_add_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always|collapseActionView"/>
+    <item
+        android:id="@+id/app-bar-done_adding"
+        app:actionViewClass="android.widget.Button"
+        android:title="Done Adding"
+        android:textColor="@color/quantum_googgreen400"/>
+    <item
+        android:id="@+id/app-bar-back"
+        app:actionViewClass="android.widget.Button"
+        android:title="Back"
+        android:textColor="@color/quantum_googgreen400"/>
+    <item
+        android:id="@+id/app-bar-mainMenu"
+        app:actionViewClass="android.widget.Button"
+        android:title="Main Menu"
+        android:textColor="@color/quantum_googgreen400"/>
+</menu>

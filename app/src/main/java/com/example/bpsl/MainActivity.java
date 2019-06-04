@@ -1,8 +1,7 @@
 package com.example.bpsl;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,10 +9,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
-
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,15 +16,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Button MainButton;
+    public static int stopperMain = 0;
+    public static ArrayList<Item> mainList = new ArrayList<>();
 
-    Database myDb;
-    NewListSearch search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +32,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //to get item data from the itemrealdata.csv file
+        if(stopperMain ==0) {
+            InputStream in = getResources().openRawResource(R.raw.itemrealdata);
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(in, Charset.forName("UTF-8"))
+            );
+
+            String line = "";
+            try {
+                while ((line = reader.readLine()) != null) {
+                    String[] tokens = line.split(",");
+                    String price = tokens[2];
+
+                    Item aItem = new Item(tokens[0], tokens[1], Double.parseDouble(tokens[2]));
+                    mainList.add(aItem);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+
+        }
+        //let the main activity read the csv file only once
+        stopperMain++;
 
         MainButton = (Button) findViewById(R.id.newlistbutton);
         MainButton.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         MainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SavedList.class);
+                Intent intent = new Intent(v.getContext(), SavedListSecond.class);
                 startActivity(intent);
             }
         });
@@ -70,24 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-    }
-
-    public void getItem(){
-        myDb = new Database(this);
-        InputStream in = getResources().openRawResource(R.raw.ten);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(in, Charset.forName("UTF-8"))
-        );
-
-        String line ="";
-        try{while((line = reader.readLine())!=null){
-            String[] tokens = line.split(",");
-            myDb.insertDataItemTable(tokens[0],tokens[1],tokens[2]);
-        }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 

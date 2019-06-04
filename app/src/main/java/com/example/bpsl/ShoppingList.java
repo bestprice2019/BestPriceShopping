@@ -1,25 +1,31 @@
 package com.example.bpsl;
 
+import java.util.ArrayList;
+
 public class ShoppingList {
-    private int id;
+    private String id;
     private String title;
     private String date;
     private String time;
-    private double total_price;
+    private Double total_price;
+    private ArrayList<Item> list;
+    private String direction;
 
-    public ShoppingList(int id, String title, String date, String time, double total_price) {
+    public ShoppingList(String id, String title, String date, String time, Double total_price, ArrayList<Item> list, String direction) {
         this.id = id;
         this.title = title;
         this.date = date;
         this.time = time;
         this.total_price = total_price;
+        this.list = list;
+        this.direction = direction;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,15 +53,31 @@ public class ShoppingList {
         this.time = time;
     }
 
-    public double getTotal_price() {
+    public Double getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(double total_price) {
+    public void setTotal_price(Double total_price) {
         this.total_price = total_price;
     }
 
+    public ArrayList<Item> getList() {
+        return this.list;
+    }
+
+    public void setList(ArrayList<Item> newlist) {
+        this.list=newlist;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction=direction;
+    }
+
     public String toString(){
-        return "ID:"+this.getId()+"\nTITLE:"+this.getTitle()+"\nDATE;"+this.getDate()+"\nTIME:"+this.getTime();
+        return "ID:"+this.getId()+"\nTITLE:"+this.getTitle()+"\nDATE:"+this.getDate()+"\nTIME:"+this.getTime()+"\nTotal Price:"+this.getTotal_price()+"$\nSupermarket:"+this.getDirection();
     }
 }

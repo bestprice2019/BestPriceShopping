@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/app-bar-edit_description"
+        app:actionViewClass="android.widget.Button"
+        android:title="Edit Description"
+        android:textColor="@color/quantum_googgreen400"/>
+    <item
+        android:id="@+id/app-bar-add"
+        app:actionViewClass="android.widget.Button"
+        android:title="Add Items"
+        android:textColor="@color/quantum_googgreen400"/>
+    <item
+        android:id="@+id/app-bar-done"
+        app:actionViewClass="android.widget.Button"
+        android:title="Done"
+        android:textColor="@color/quantum_googgreen400"/>
+    <item
+        android:id="@+id/app-bar-back"
+        app:actionViewClass="android.widget.Button"
+        android:title="Back"
+        android:textColor="@color/quantum_googgreen400"/>
+    <item
+        android:id="@+id/app-bar-mainMenu"
+        app:actionViewClass="android.widget.Button"
+        android:title="Main Menu"
+        android:textColor="@color/quantum_googgreen400"/>
+    </menu>
