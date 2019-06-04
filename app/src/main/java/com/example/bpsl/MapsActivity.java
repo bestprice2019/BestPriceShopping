@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.example.bpsl.Remote.IGoogleAPIService;
 import com.example.bpsl.model.MyPlaces;
 import com.example.bpsl.model.Results;
@@ -32,6 +33,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +56,7 @@ import retrofit2.Response;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, RoutingListener {
 
     private static final int MY_PERMISSION_CODE = 1000;
     private GoogleMap mMap;
@@ -53,7 +65,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double latitude,longitude;
     private Location mLastLocation;
     private Marker mMarker;
+    private Marker userMarker;
     private LocationRequest mLocationRequest;
+    private List<Polyline> polylines;
+    private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
 
     IGoogleAPIService mService;
 
@@ -65,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        polylines = new ArrayList<>();
 
         //Init Service
         mService = Common.getGoogleAPIService();
@@ -128,6 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //fullList.position(latLng);
                                 markerOptions.position(latLng);
                                 markerOptions.title(placeName);
+                                markerOptions.snippet(vicinity);
                                 if(placeType.equals("countdown"))
                                     //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -157,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //builds a URL for the api request
-    private String getUrl(double latitude, double longitude, String placeType) {
+    public String getUrl(double latitude, double longitude, String placeType) {
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googlePlacesUrl.append("location="+latitude+","+longitude);
         googlePlacesUrl.append("&radius="+10000);
@@ -165,10 +182,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&name="+placeType);
         googlePlacesUrl.append("&keyword="+placeType);
-        googlePlacesUrl.append("&key="+getResources().getString(R.string.browser_key));
+        googlePlacesUrl.append("&key="+getString(R.string.google_maps_key));
         //example finished URL:
         //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-37.089951,174.9951966&radius=10000&type=grocery_or_supermarket&sensor=true&name=countdown&key=AIzaSyB4QKrFVweZXJN-gHiMl6lpYFASMAQ9-04
-        Log.d("getUrl",googlePlacesUrl.toString());
+//      Log.d("getUrl",googlePlacesUrl.toString());
         return googlePlacesUrl.toString();
     }
 
@@ -225,10 +242,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+                mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        System.out.println("MARKER CLICKED");
+                        if (userMarker != null) {
+                            getDirectionsURL(userMarker.getPosition(),marker.getPosition(), "driving");
+
+                        }
+                        return false;
+
+                    }
+                });
             }
             else {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+                mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        System.out.println("MARKER CLICKED");
+                        if (userMarker != null) {
+                            getDirectionsURL(userMarker.getPosition(),marker.getPosition(), "driving");
+
+                        }
+                        return false;
+
+                    }
+                });
             }
         }
     }
@@ -271,6 +312,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(mMarker != null)
             mMarker.remove();
 
+
         latitude = location.getLatitude();
         longitude = location.getLongitude();
 
@@ -281,6 +323,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
 
         mMarker = mMap.addMarker(markerOptions);
+        userMarker = mMarker;
 
         //Move camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -288,5 +331,85 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if(mGoogleApiClient !=  null)
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
+    }
+
+
+
+    private String getDirectionsURL(LatLng origin, LatLng dest, String directionMode) {
+        //Origin of route
+        String str_origin = "origin=" +origin.latitude +","+origin.longitude;
+        //destinate of route
+        String str_dest = "destination=" +dest.latitude+","+dest.longitude;
+        //mode
+        String mode = "mode=" +directionMode;
+        //building parameters to the web service
+        String parameters = str_origin+"&"+str_dest+"&"+mode;
+        //output format
+        String output = "json";
+        //Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters+"&key="+getString(R.string.google_maps_key);
+        //System.out.println("DIRECTIONS URL: "+url);
+        getRouteToMarker(dest);
+        return url;
+
+    }
+
+    private void getRouteToMarker(LatLng dest) {
+        //System.out.println("MAKING ROUTE");
+        Routing routing = new Routing.Builder()
+                .key(getString(R.string.google_maps_key))
+                .travelMode(AbstractRouting.TravelMode.DRIVING)
+                .withListener(this)
+                .alternativeRoutes(false)
+                .waypoints(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()), dest)
+                .build();
+        routing.execute();
+    }
+
+
+    @Override
+    public void onRoutingFailure(RouteException e) {
+        // The Routing request failed
+        if(e != null) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRoutingStart() {
+    
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
+        if(polylines.size()>0) {
+            for (Polyline poly : polylines) {
+                poly.remove();
+            }
+        }
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map.
+        for (int i = 0; i <route.size(); i++) {
+
+            //In case of more than 5 alternative routes
+            int colorIndex = i % COLORS.length;
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.width(10 + i * 3);
+            polyOptions.addAll(route.get(i).getPoints());
+            Polyline polyline = mMap.addPolyline(polyOptions);
+            polylines.add(polyline);
+
+            Toast.makeText(getApplicationContext(),"Route "+ (i+1) +": distance - "+ route.get(i).getDistanceValue()+": duration - "+ route.get(i).getDurationValue(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+
     }
 }

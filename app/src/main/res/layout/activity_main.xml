@@ -80,5 +80,16 @@
         android:textColor="@color/quantum_googgreen400"
         android:textSize="20dp" />
 
+    <Button
+        android:id="@+id/findstoresbutton"
+        android:layout_width="181dp"
+        android:layout_height="58dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="600dp"
+        android:text="Find Stores"
+        android:textSize="20dp"
+        />
+
 
 </RelativeLayout>
